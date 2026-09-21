@@ -22,16 +22,14 @@ define('WP_CACHE', false); // Disabled for local development
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'skye_dm_wp' );
-
-/** Database username */
-define( 'DB_USER', 'root' );
-
-/** Database password */
-define( 'DB_PASSWORD', '' );
-
-/** Database hostname */
-define( 'DB_HOST', 'localhost' );
+if ( file_exists( __DIR__ . '/wp-config-local.php' ) ) {
+    require_once __DIR__ . '/wp-config-local.php';
+} else {
+    define( 'DB_NAME', 'earningin_skye' );
+    define( 'DB_USER', 'earningin_skye' );
+    define( 'DB_PASSWORD', 'bYUnYh,mCy-K?jue' );
+    define( 'DB_HOST', 'localhost' );
+}
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
