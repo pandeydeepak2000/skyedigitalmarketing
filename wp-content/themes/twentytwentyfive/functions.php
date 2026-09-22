@@ -305,3 +305,8 @@ function tbt_inject_google_analytics() {
 }
 add_action( 'wp_head', 'tbt_inject_google_analytics', 2 );
 
+
+function skye_enqueue_assets() {
+    wp_enqueue_style( 'skye-premium', get_template_directory_uri() . '/assets/css/skye-premium.css', [], '1.0.0' );
+}
+add_action( 'wp_enqueue_scripts', 'skye_enqueue_assets', 99 );

@@ -4,44 +4,42 @@
  * Slug: twentytwentyfive/header
  * Categories: header
  * Block Types: core/template-part/header
- * Description: TopBlogTech Premium Header with Brand Logo and Categories.
- *
- * @package WordPress
- * @subpackage Twenty_Twenty_Five
- * @since Twenty Twenty-Five 1.0
+ * Description: Skye Digital Marketing High-Tech Agency Header
  */
-
-$logo_url = home_url( '/wp-content/uploads/topblogtech-nav-logo.png' );
+$logo_url = home_url( '/wp-content/uploads/skye-nav-logo.jpg' );
 $home_url = home_url( '/' );
 ?>
 <!-- wp:html -->
-<header class="tbt-header">
-	<div class="tbt-header-inner">
-		<div class="tbt-brand">
-			<a href="<?php echo esc_url( $home_url ); ?>" class="tbt-logo-link" title="TopBlogTech - Learn | Grow | Earn">
-				<img src="<?php echo esc_url( $logo_url ); ?>" alt="TopBlogTech Logo" class="tbt-logo-img" />
+<header class="skye-header">
+	<div class="skye-header-inner">
+		<div class="skye-brand">
+			<a href="<?php echo esc_url( $home_url ); ?>" class="skye-logo-link" title="Skye Digital Marketing - Enterprise Growth Agency">
+				<img src="<?php echo esc_url( $logo_url ); ?>" alt="Skye Digital Marketing" class="skye-logo-img" />
+				<div class="skye-brand-text">
+					<span class="skye-brand-title">SKYE <span class="skye-cyan-text">DIGITAL</span></span>
+					<span class="skye-brand-sub">PERFORMANCE MARKETING</span>
+				</div>
 			</a>
 		</div>
 
-		<nav class="tbt-nav" aria-label="Main Navigation">
-			<ul class="tbt-nav-list">
-				<li><a href="<?php echo esc_url( $home_url ); ?>" class="tbt-nav-item active">Home</a></li>
-				<li><a href="<?php echo esc_url( $home_url . 'category/blogging/' ); ?>" class="tbt-nav-item">Blogging</a></li>
-				<li><a href="<?php echo esc_url( $home_url . 'category/online-money/' ); ?>" class="tbt-nav-item">Online Money</a></li>
-				<li><a href="<?php echo esc_url( $home_url . 'category/youtube-growth/' ); ?>" class="tbt-nav-item">YouTube</a></li>
-				<li><a href="<?php echo esc_url( $home_url . 'category/google-adsense/' ); ?>" class="tbt-nav-item">Google AdSense</a></li>
-				<li><a href="<?php echo esc_url( $home_url . 'category/passive-income/' ); ?>" class="tbt-nav-item">Passive Income</a></li>
+		<nav class="skye-nav" aria-label="Main Navigation">
+			<ul class="skye-nav-list">
+				<li><a href="<?php echo esc_url( $home_url ); ?>" class="skye-nav-item active">Home</a></li>
+				<li><a href="<?php echo esc_url( $home_url . 'category/paid-media/' ); ?>" class="skye-nav-item">Performance Ads</a></li>
+				<li><a href="<?php echo esc_url( $home_url . 'category/performance-marketing/' ); ?>" class="skye-nav-item">PPC &amp; Search</a></li>
+				<li><a href="<?php echo esc_url( $home_url . 'category/conversion-optimization/' ); ?>" class="skye-nav-item">ROAS Funnels</a></li>
+				<li><a href="<?php echo esc_url( $home_url . 'category/analytics-growth/' ); ?>" class="skye-nav-item">CRO &amp; Analytics</a></li>
 			</ul>
 		</nav>
 
-		<div class="tbt-header-actions">
-			<a href="<?php echo esc_url( $home_url . 'how-to-start-a-tech-finance-blog-2024/' ); ?>" class="tbt-btn-cta">
-				<span>Featured Guide</span> 🚀
+		<div class="skye-header-actions">
+			<a href="<?php echo esc_url( $home_url . 'meta-google-ads-scaling-cpa-reduction-playbook-2024/' ); ?>" class="skye-btn-cta">
+				<span>Growth Audit</span> 🚀
 			</a>
-			<button class="tbt-mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.tbt-header').classList.toggle('tbt-mobile-open')">
-				<span class="tbt-bar"></span>
-				<span class="tbt-bar"></span>
-				<span class="tbt-bar"></span>
+			<button class="skye-mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.skye-header').classList.toggle('skye-mobile-open')">
+				<span class="skye-bar"></span>
+				<span class="skye-bar"></span>
+				<span class="skye-bar"></span>
 			</button>
 		</div>
 	</div>
