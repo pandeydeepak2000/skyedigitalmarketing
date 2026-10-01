@@ -34,7 +34,7 @@ $home_url = home_url( '/' );
 
 		<div class="skye-header-actions">
 			<a href="<?php echo esc_url( $home_url . 'meta-google-ads-scaling-cpa-reduction-playbook-2024/' ); ?>" class="skye-btn-cta">
-				<span>Growth Audit</span> 🚀
+				<span>Growth Audit</span> &#128640;
 			</a>
 			<button class="skye-mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.skye-header').classList.toggle('skye-mobile-open')">
 				<span class="skye-bar"></span>

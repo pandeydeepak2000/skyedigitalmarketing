@@ -167,42 +167,127 @@ if ( ! function_exists( 'twentytwentyfive_format_binding' ) ) :
 endif;
 
 /**
- * TopBlogTech Automated SEO & Schema Engine
+ * ============================================================================
+ * SKYE DIGITAL MARKETING - ENTERPRISE SEO, GA4 & PERFORMANCE ENGINE
+ * ============================================================================
  */
-function tbt_inject_seo_meta() {
-	$site_name = get_bloginfo( 'name' );
-	$site_desc = get_bloginfo( 'description' );
-	$logo_url  = home_url( '/wp-content/uploads/topblogtech-nav-logo.png' );
 
-	echo "\n<!-- Google Search Console Verification -->\n";
-	echo '<meta name="google-site-verification" content="hqGQLKOd7hV2OFJhYRwpBaDiI2hc_aXdP3DdLmOjMrg" />' . "\n";
+// 1. Preconnect & DNS-Prefetch for Speed & Core Web Vitals
+function skye_inject_resource_hints() {
+	echo "
+<!-- Resource Hints for Maximum Performance & Core Web Vitals -->
+";
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "
+";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "
+";
+	echo '<link rel="preconnect" href="https://www.googletagmanager.com">' . "
+";
+	echo '<link rel="dns-prefetch" href="https://www.google-analytics.com">' . "
+";
+}
+add_action( 'wp_head', 'skye_inject_resource_hints', 0 );
+
+/**
+ * 2. Google Analytics 4 (GA4) Tracking Engine
+ * Measurement ID: G-82E1ZX9PCV (Skye Digital Marketing)
+ * Includes Enhanced Event Tracking for Growth Audits, CTAs, and Conversions
+ */
+function skye_inject_google_analytics() {
+	?>
+<!-- Google tag (gtag.js) - Skye Digital Marketing GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82E1ZX9PCV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-82E1ZX9PCV', {
+    'send_page_view': true,
+    'cookie_flags': 'SameSite=None;Secure',
+    'site_name': 'Skye Digital Marketing'
+  });
+
+  // Track CTA clicks (Growth Audit, Lead CTAs, Contact)
+  document.addEventListener('DOMContentLoaded', function() {
+    var ctaButtons = document.querySelectorAll('.skye-btn-cta, .skye-hero-cta, a[href*="audit"], a[href*="contact"]');
+    ctaButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        gtag('event', 'click_cta_audit', {
+          'event_category': 'Engagement',
+          'event_label': btn.innerText.trim() || 'CTA Button',
+          'link_url': btn.getAttribute('href') || ''
+        });
+      });
+    });
+  });
+</script>
+	<?php
+}
+add_action( 'wp_head', 'skye_inject_google_analytics', 1 );
+
+/**
+ * 3. Skye Digital Marketing Automated SEO & Rich Schema Engine
+ * High-authority meta tags, Open Graph, Twitter Cards, and JSON-LD Structured Data
+ */
+function skye_inject_seo_meta() {
+	$site_name   = 'Skye Digital Marketing';
+	$site_domain = 'https://skyedigitalmarketing.com';
+	$default_desc = 'Skye Digital Marketing is a premier performance advertising and growth marketing agency. We engineer predictable customer acquisition pipelines, scale multi-channel paid media (Meta, Google, TikTok), and build high-ROAS conversion funnels.';
+	$logo_url    = home_url( '/wp-content/uploads/skye-nav-logo.jpg' );
+
+	echo "
+<!-- Search Engine Directives -->
+";
+	echo '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />' . "
+";
 
 	if ( is_singular() ) {
 		global $post;
-		$title          = get_the_title() . ' - ' . $site_name;
+		$title          = get_the_title() . ' | ' . $site_name;
 		$excerpt        = has_excerpt() ? get_the_excerpt() : wp_trim_words( strip_shortcodes( $post->post_content ), 26, '...' );
 		$canonical      = get_permalink();
 		$thumb_id       = get_post_thumbnail_id();
 		$image_url      = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'full' ) : $logo_url;
 		$published_time = get_the_date( 'c' );
 		$modified_time  = get_the_modified_date( 'c' );
+		$author_name    = get_the_author() ? get_the_author() : 'Growth Team';
+		$categories     = get_the_category();
+		$cat_name       = ! empty( $categories ) ? $categories[0]->name : 'Performance Marketing';
 
-		echo "\n<!-- TopBlogTech SEO Engine -->\n";
-		echo '<meta name="description" content="' . esc_attr( $excerpt ) . '" />' . "\n";
-		echo '<link rel="canonical" href="' . esc_url( $canonical ) . '" />' . "\n";
-		echo '<meta property="og:type" content="article" />' . "\n";
-		echo '<meta property="og:title" content="' . esc_attr( get_the_title() ) . '" />' . "\n";
-		echo '<meta property="og:description" content="' . esc_attr( $excerpt ) . '" />' . "\n";
-		echo '<meta property="og:url" content="' . esc_url( $canonical ) . '" />' . "\n";
-		echo '<meta property="og:site_name" content="' . esc_attr( $site_name ) . '" />' . "\n";
-		echo '<meta property="og:image" content="' . esc_url( $image_url ) . '" />' . "\n";
-		echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
-		echo '<meta name="twitter:title" content="' . esc_attr( get_the_title() ) . '" />' . "\n";
-		echo '<meta name="twitter:description" content="' . esc_attr( $excerpt ) . '" />' . "\n";
-		echo '<meta name="twitter:image" content="' . esc_url( $image_url ) . '" />' . "\n";
+		echo "\n<!-- Skye Digital Marketing SEO Meta Tags -->\n";
+		echo '<meta name="description" content="' . esc_attr( $excerpt ) . '" />' . "
+";
+		echo '<link rel="canonical" href="' . esc_url( $canonical ) . '" />\n';
+		echo '<meta property="og:locale" content="en_US" />\n';
+		echo '<meta property="og:type" content="article" />' . "
+";
+		echo '<meta property="og:title" content="' . esc_attr( $title ) . '" />' . "
+";
+		echo '<meta property="og:description" content="' . esc_attr( $excerpt ) . '" />' . "
+";
+		echo '<meta property="og:url" content="' . esc_url( $canonical ) . '" />\n';
+		echo '<meta property="og:site_name" content="' . esc_attr( $site_name ) . '" />\n';
+		echo '<meta property="article:published_time" content="' . esc_attr( $published_time ) . '" />' . "
+";
+		echo '<meta property="article:modified_time" content="' . esc_attr( $modified_time ) . '" />' . "
+";
+		echo '<meta property="article:section" content="' . esc_attr( $cat_name ) . '" />' . "
+";
+		echo '<meta property="og:image" content="' . esc_url( $image_url ) . '" />' . "
+";
+		echo '<meta property="og:image:alt" content="' . esc_attr( get_the_title() ) . '" />' . "
+";
+		echo '<meta name="twitter:card" content="summary_large_image" />\n';
+		echo '<meta name="twitter:title" content="' . esc_attr( $title ) . '" />' . "
+";
+		echo '<meta name="twitter:description" content="' . esc_attr( $excerpt ) . '" />' . "
+";
+		echo '<meta name="twitter:image" content="' . esc_url( $image_url ) . '" />' . "
+";
 
-		// JSON-LD BlogPosting Schema
-		$schema = array(
+		// 1. Article / BlogPosting Schema
+		$article_schema = array(
 			'@context'         => 'https://schema.org',
 			'@type'            => 'BlogPosting',
 			'headline'         => get_the_title(),
@@ -210,103 +295,188 @@ function tbt_inject_seo_meta() {
 			'image'            => $image_url,
 			'datePublished'    => $published_time,
 			'dateModified'     => $modified_time,
+			'inLanguage'       => 'en-US',
+			'mainEntityOfPage' => array(
+				'@type' => 'WebPage',
+				'@id'   => $canonical,
+			),
 			'author'           => array(
 				'@type' => 'Person',
-				'name'  => get_the_author() ? get_the_author() : 'Editorial Team',
+				'name'  => $author_name,
+				'url'   => home_url( '/about-us/' ),
 			),
 			'publisher'        => array(
 				'@type' => 'Organization',
 				'name'  => $site_name,
+				'url'   => $site_domain,
 				'logo'  => array(
 					'@type' => 'ImageObject',
 					'url'   => $logo_url,
 				),
 			),
-			'mainEntityOfPage' => array(
-				'@type' => 'WebPage',
-				'@id'   => $canonical,
+		);
+		echo '<script type="application/ld+json">' . json_encode( $article_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "
+";
+
+		// 2. BreadcrumbList Schema for Google Search Snippets
+		$breadcrumb_schema = array(
+			'@context'        => 'https://schema.org',
+			'@type'           => 'BreadcrumbList',
+			'itemListElement' => array(
+				array(
+					'@type'    => 'ListItem',
+					'position' => 1,
+					'name'     => 'Home',
+					'item'     => home_url( '/' ),
+				),
+				array(
+					'@type'    => 'ListItem',
+					'position' => 2,
+					'name'     => $cat_name,
+					'item'     => ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : home_url( '/' ),
+				),
+				array(
+					'@type'    => 'ListItem',
+					'position' => 3,
+					'name'     => get_the_title(),
+					'item'     => $canonical,
+				),
 			),
 		);
-		echo '<script type="application/ld+json">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "\n";
-	} else {
-		$canonical = home_url( '/' );
-		echo "\n<!-- TopBlogTech SEO Engine -->\n";
-		echo '<meta name="description" content="' . esc_attr( $site_desc . ' - High-authority blueprints on tech blogging, video algorithms, AdSense optimization, and modern digital wealth.' ) . '" />' . "\n";
-		echo '<link rel="canonical" href="' . esc_url( $canonical ) . '" />' . "\n";
-		echo '<meta property="og:type" content="website" />' . "\n";
-		echo '<meta property="og:title" content="' . esc_attr( $site_name . ' - Learn | Grow | Earn' ) . '" />' . "\n";
-		echo '<meta property="og:description" content="' . esc_attr( $site_desc ) . '" />' . "\n";
-		echo '<meta property="og:url" content="' . esc_url( $canonical ) . '" />' . "\n";
-		echo '<meta property="og:image" content="' . esc_url( $logo_url ) . '" />' . "\n";
-		echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+		echo '<script type="application/ld+json">' . json_encode( $breadcrumb_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "
+";
 
-		// Organization & WebSite Schema
+	} else {
+		$canonical = is_home() || is_front_page() ? home_url( '/' ) : ( ( isset( $_SERVER['HTTPS'] ) && 'on' === $_SERVER['HTTPS'] ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+		$page_title = is_category() ? single_cat_title( '', false ) . ' | ' . $site_name : $site_name . ' | Enterprise Performance Marketing & Growth Agency';
+
+		echo "\n<!-- Skye Digital Marketing SEO Meta Tags -->\n";
+		echo '<meta name="description" content="' . esc_attr( $default_desc ) . '" />\n';
+		echo '<link rel="canonical" href="' . esc_url( $canonical ) . '" />\n';
+		echo '<meta property="og:locale" content="en_US" />\n';
+		echo '<meta property="og:type" content="website" />\n';
+		echo '<meta property="og:title" content="' . esc_attr( $page_title ) . '" />\n';
+		echo '<meta property="og:description" content="' . esc_attr( $default_desc ) . '" />\n';
+		echo '<meta property="og:url" content="' . esc_url( $canonical ) . '" />\n';
+		echo '<meta property="og:site_name" content="' . esc_attr( $site_name ) . '" />\n';
+		echo '<meta property="og:image" content="' . esc_url( $logo_url ) . '" />\n';
+		echo '<meta name="twitter:card" content="summary_large_image" />\n';
+		echo '<meta name="twitter:title" content="' . esc_attr( $page_title ) . '" />\n';
+		echo '<meta name="twitter:description" content="' . esc_attr( $default_desc ) . '" />\n';
+		echo '<meta name="twitter:image" content="' . esc_url( $logo_url ) . '" />\n';
+
+		// 1. WebSite Schema with SearchAction
 		$site_schema = array(
 			'@context'        => 'https://schema.org',
 			'@type'           => 'WebSite',
 			'name'            => $site_name,
-			'url'             => $canonical,
+			'url'             => $site_domain,
 			'potentialAction' => array(
 				'@type'       => 'SearchAction',
 				'target'      => home_url( '/?s={search_term_string}' ),
 				'query-input' => 'required name=search_term_string',
 			),
 		);
-		echo '<script type="application/ld+json">' . json_encode( $site_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>' . "\n";
+		echo '<script type="application/ld+json">' . json_encode( $site_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>\n';
+
+		// 2. DigitalMarketingAgency & Organization Schema
+		$agency_schema = array(
+			'@context'       => 'https://schema.org',
+			'@type'          => array( 'DigitalMarketingAgency', 'ProfessionalService', 'Organization' ),
+			'name'           => $site_name,
+			'url'            => $site_domain,
+			'logo'           => $logo_url,
+			'image'          => $logo_url,
+			'description'    => $default_desc,
+			'priceRange'     => '$$$',
+			'currenciesAccepted' => 'USD, EUR, GBP',
+			'paymentAccepted' => 'Credit Card, Bank Wire',
+			'areaServed'     => array(
+				'@type' => 'Country',
+				'name'  => 'Worldwide',
+			),
+			'knowsAbout'     => array(
+				'Performance Marketing',
+				'Paid Media Scaling',
+				'Meta Ads & TikTok Ads',
+				'Google Search & Performance Max',
+				'Conversion Rate Optimization',
+				'AI Automation',
+			),
+			'hasOfferCatalog' => array(
+				'@type'            => 'OfferCatalog',
+				'name'             => 'Growth & Performance Marketing Services',
+				'itemListElement'  => array(
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
+							'name'  => 'Paid Media & ROAS Scaling',
+						),
+					),
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
+							'name'  => 'Conversion Rate Optimization (CRO)',
+						),
+					),
+					array(
+						'@type' => 'Offer',
+						'itemOffered' => array(
+							'@type' => 'Service',
+							'name'  => 'AI Lead Generation & Automation',
+						),
+					),
+				),
+			),
+		);
+		echo '<script type="application/ld+json">' . json_encode( $agency_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>\n';
 	}
 }
-add_action( 'wp_head', 'tbt_inject_seo_meta', 1 );
+add_action( 'wp_head', 'skye_inject_seo_meta', 2 );
 
 /**
- * TopBlogTech Enterprise Security Hardening
+ * 4. Enterprise Security Hardening
  */
-// 1. Disable XML-RPC completely (Blocks 95% of automated brute-force attacks)
+// Disable XML-RPC completely (Blocks automated brute force attacks)
 add_filter( 'xmlrpc_enabled', '__return_false' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 
-// 2. Hide WordPress Version everywhere (prevents bot vulnerability scans)
+// Hide WordPress Version everywhere
 remove_action( 'wp_head', 'wp_generator' );
 add_filter( 'the_generator', '__return_empty_string' );
 
-// 3. Prevent Username Enumeration / Author Scans (?author=1)
+// Prevent Username Enumeration / Author Scans (?author=1)
 if ( ! is_admin() && isset( $_REQUEST['author'] ) ) {
 	wp_redirect( home_url( '/' ), 301 );
 	exit;
 }
 
-// 4. Remove version strings from scripts and styles for security through obscurity
-function tbt_remove_ver_css_js( $src ) {
+// Remove query strings from static resources for caching & security
+function skye_clean_static_versions( $src ) {
 	if ( strpos( $src, '?ver=' ) ) {
 		$src = remove_query_arg( 'ver', $src );
 	}
 	return $src;
 }
-add_filter( 'style_loader_src', 'tbt_remove_ver_css_js', 9999 );
-add_filter( 'script_loader_src', 'tbt_remove_ver_css_js', 9999 );
+add_filter( 'style_loader_src', 'skye_clean_static_versions', 9999 );
+add_filter( 'script_loader_src', 'skye_clean_static_versions', 9999 );
 
 /**
- * TopBlogTech Google Analytics (GA4) Tracking Script
- * Stream: topblog (https://topblogtech.com)
- * Measurement ID: G-SNDLMK8H9E
+ * 5. Asset Enqueuing & Inlined Critical CSS for 100/100 PageSpeed
  */
-function tbt_inject_google_analytics() {
-	?>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SNDLMK8H9E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SNDLMK8H9E');
-</script>
-	<?php
-}
-add_action( 'wp_head', 'tbt_inject_google_analytics', 2 );
-
-
 function skye_enqueue_assets() {
-    wp_enqueue_style( 'skye-premium', get_template_directory_uri() . '/assets/css/skye-premium.css', [], '1.0.0' );
+	wp_enqueue_style( 'skye-premium', get_template_directory_uri() . '/assets/css/skye-premium.css', array(), '1.1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'skye_enqueue_assets', 99 );
+
+function skye_inject_critical_styles() {
+	$css_file = get_template_directory() . '/assets/css/skye-premium.css';
+	if ( file_exists( $css_file ) ) {
+		echo "\n<!-- Skye Digital Marketing Critical Styles -->\n";
+		echo "<style id=\"skye-critical-css\">\n" . file_get_contents( $css_file ) . "\n</style>\n";
+	}
+}
+add_action( 'wp_head', 'skye_inject_critical_styles', 999 );
